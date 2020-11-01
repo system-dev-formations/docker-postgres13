@@ -7,6 +7,7 @@ FROM alpine
 # the home directory for the postgres user, however, is not created by default
 # see https://github.com/docker-library/postgres/issues/274
 RUN set -ex; \
+    adduser postgres --disabled-password --no-create-home \
 	postgresHome="$(getent passwd postgres)"; \
 	postgresHome="$(echo "$postgresHome" | cut -d: -f6)"; \
 	[ "$postgresHome" = '/var/lib/postgresql' ]; \
